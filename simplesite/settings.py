@@ -28,6 +28,12 @@ SECRET_KEY = 'django-insecure-byf7^1$_3#s02^0f#nq@iasi3smj_o+9(dit(b=vpws&sr^t+#
 DEBUG = True
 
 env = environ.Env()
+
+if os.path.isfile(os.path.join(BASE_DIR, '.env')):
+    env.read_env(os.path.join(BASE_DIR, '.env'))
+else:
+    logger.error("No .env provided. Using local os env")
+
 ALLOWED_HOSTS = env("ALLOWED_HOSTS").split(',')
 
 
